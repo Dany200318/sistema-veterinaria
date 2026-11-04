@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Lista de Mascotas</h1>
+    
+    <div class="mb-3">
+        <a href="{% url 'crear_mascota' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Nueva Mascota
+        </a>
+    </div>
+    
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Raza</th>
+                        <th>Propietario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mascota in mascotas %}
+                    <tr>
+                        <td>{{ mascota.nombre }}</td>
+                        <td>{{ mascota.get_tipo_display }}</td>
+                        <td>{{ mascota.raza }}</td>
+                        <td>{{ mascota.propietario.nombre }} {{ mascota.propietario.apellido }}</td>
+                        <td>
+                            <a href="{% url 'detalle_mascota' mascota.id %}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-eye"></i> Ver
+                            </a>
+                            <a href="{% url 'editar_mascota' mascota.id %}" class="btn btn-sm btn-info">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a href="{% url 'eliminar_mascota' mascota.id %}" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">No hay mascotas registradas.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3>Detalle de la Cita</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Información de la Mascota</h4>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Nombre:</strong> {{ cita.nombre_mascota }}</li>
+                        <li class="list-group-item"><strong>Tipo:</strong> {{ cita.tipo_animal }}</li>
+                        <li class="list-group-item"><strong>Raza:</strong> {{ cita.raza }}</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h4>Información del Propietario</h4>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Nombre:</strong> {{ cita.nombre_autorizado }} {{ cita.apellido_autorizado }}</li>
+                        <li class="list-group-item"><strong>Teléfono:</strong> {{ cita.celular }}</li>
+                        <li class="list-group-item"><strong>Correo:</strong> {{ cita.correo }}</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h4>Detalles de la Cita</h4>
+            <ul class="list-group mb-3">
+                <li class="list-group-item"><strong>Fecha y Hora:</strong> {{ cita.fecha }}</li>
+                {% if cita.estado %}
+                <li class="list-group-item">
+                    <strong>Estado:</strong> 
+                    {% if cita.estado == 'PENDIENTE' %}
+                        <span class="badge bg-warning">Pendiente</span>
+                    {% elif cita.estado == 'CONFIRMADA' %}
+                        <span class="badge bg-info">Confirmada</span>
+                    {% elif cita.estado == 'COMPLETADA' %}
+                        <span class="badge bg-success">Completada</span>
+                    {% elif cita.estado == 'CANCELADA' %}
+                        <span class="badge bg-danger">Cancelada</span>
+                    {% endif %}
+                </li>
+                {% endif %}
+                <li class="list-group-item"><strong>Motivo:</strong> {{ cita.motivo }}</li>
+            </ul>
+            
+            <div class="mt-3">
+                <a href="{% url 'editar_cita' cita.pk %}" class="btn btn-warning">
+                    <i class="fas fa-edit"></i> Editar Cita
+                </a>
+                <a href="{% url 'eliminar_cita' cita.pk %}" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Eliminar Cita
+                </a>
+                <a href="{% url 'lista_citas' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Volver a la Lista
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
