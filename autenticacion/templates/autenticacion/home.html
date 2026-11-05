@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Bienvenido a la Clínica Veterinaria</h1>
+    
+    <div class="row mt-4">
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Citas</h5>
+                    <p class="card-text">Gestiona las citas de las mascotas</p>
+                    <a href="{% url 'lista_citas' %}" class="btn btn-primary">Ir a Citas</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Pacientes</h5>
+                    <p class="card-text">Administra propietarios y mascotas</p>
+                    <a href="{% url 'lista_propietarios' %}" class="btn btn-primary">Ir a Propietarios</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
